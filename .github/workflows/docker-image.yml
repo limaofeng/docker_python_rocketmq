@@ -14,6 +14,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: Get Tag Name
+      run:  echo "RELEASE_VERSION=$(date +%s)" >> $GITHUB_ENV
     - name: Log in to Docker Hub
       uses: docker/login-action@v1
       with:
@@ -27,4 +29,4 @@ jobs:
         push: true
         tags: |
           limaofeng/python_rocketmq:latest
-          limaofeng/python_rocketmq:$(date +%s)
+          limaofeng/python_rocketmq:${{ env.RELEASE_VERSION }}
